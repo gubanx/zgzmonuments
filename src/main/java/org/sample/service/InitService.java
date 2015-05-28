@@ -22,7 +22,7 @@ public class InitService {
     private MonumentList monumentList = new MonumentList();
 
     @PostConstruct
-    public void init() {
+    private void init() {
         LOG.info("Inicio de la aplicación");
         Client client = ClientBuilder.newClient();
         WebTarget webTarget = client.target(URLSTRING);

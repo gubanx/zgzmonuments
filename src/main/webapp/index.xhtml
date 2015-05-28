@@ -10,10 +10,39 @@
 
 <h:body>
 
+    <div class="ui-grid headerDiv ui-grid-responsive">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                header
+            </div>
+        </div>
+    </div>
+    <div class="ui-grid ui-grid-responsive">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-2 menuDiv">small menu column</div>
+            <div class="ui-grid-col-8 contentDiv">wide column</div>
+            <div class="ui-grid-col-2 sidebarDiv">small sidebar column</div>
+        </div>
+    </div>
+    <div class="ui-grid footerDiv  ui-grid-responsive">
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                footer
+            </div>
+        </div>
+    </div>
+
     <h:form>
-        <p:dataTable id="monumentsTable" var="monument" value="#{monumentMB.monuments}">
-            <p:column headerText="ID">#{monument.id}</p:column>
-            <p:column headerText="TITLE"><h:outputText value="#{monument.title}" /></p:column>
+        <h:panelGrid columns="2">
+            #{msg['app.language']}:
+            <p:selectOneMenu value="#{languageMB.localeCode}" onchange="submit()"
+                             valueChangeListener="#{languageMB.localeChanged}">
+                <f:selectItems value="#{languageMB.countries}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <p:dataTable id="monumentsTable" var="monument" value="#{monumentMB.monuments}" style="width:50%;height:50%">
+            <p:column headerText="#{msg['app.title']}"><h:outputText value="#{monument.title}" /></p:column>
         </p:dataTable>
     </h:form>
 
