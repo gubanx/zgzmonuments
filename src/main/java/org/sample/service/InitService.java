@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 public class InitService {
 
     private static final Logger LOG = LoggerFactory.getLogger(InitService.class);
-    private static final String URLSTRING = "http://www.zaragoza.es/api/recurso/turismo/monumento?start=0&rows=50&distance=500";
+    private static final String URLSTRING = "http://www.zaragoza.es/api/recurso/turismo/monumento?start=0&rows=50&distance=500&srsname=wgs84";
 
     private MonumentList monumentList = new MonumentList();
 

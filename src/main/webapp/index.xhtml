@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
 
@@ -10,27 +9,7 @@
 
 <h:body>
 
-    <div class="ui-grid headerDiv ui-grid-responsive">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-                header
-            </div>
-        </div>
-    </div>
-    <div class="ui-grid ui-grid-responsive">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-2 menuDiv">small menu column</div>
-            <div class="ui-grid-col-8 contentDiv">wide column</div>
-            <div class="ui-grid-col-2 sidebarDiv">small sidebar column</div>
-        </div>
-    </div>
-    <div class="ui-grid footerDiv  ui-grid-responsive">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12">
-                footer
-            </div>
-        </div>
-    </div>
+    <h1>#{msg['app.title']}</h1>
 
     <h:form>
         <h:panelGrid columns="2">
@@ -41,10 +20,27 @@
             </p:selectOneMenu>
         </h:panelGrid>
 
-        <p:dataTable id="monumentsTable" var="monument" value="#{monumentMB.monuments}" style="width:50%;height:50%">
-            <p:column headerText="#{msg['app.title']}"><h:outputText value="#{monument.title}" /></p:column>
+        <p:dataTable id="monumentsTable" var="monument" value="#{monumentMB.monuments}" style="width:49%;float:left">
+            <p:column headerText="#{msg['table.title']}"><h:outputText value="#{monument.title}"/></p:column>
+            <p:column style="width:32px;text-align: center">
+                <p:commandButton actionListener="#{monumentMB.onSelectMonument(monument)}"
+                                 update="@form:detail" icon="ui-icon-search" title="View"/>
+            </p:column>
         </p:dataTable>
+
+        <p:outputPanel id="detail" style="width:49%;float:right">
+            <p:gmap id="map" widgetVar="map" center="#{monumentMB.centerMap}" zoom="#{monumentMB.zoom}"
+                    model="#{monumentMB.mapModel}" type="HYBRID" style="width:100%;height:400px"/>
+
+            <img src="#{monumentMB.selectedMonument.image}"/>
+
+            <h:outputText escape="false" value="#{monumentMB.selectedMonument.description}"
+                          style="width:49%;float:right"/>
+        </p:outputPanel>
     </h:form>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 </h:body>
 
