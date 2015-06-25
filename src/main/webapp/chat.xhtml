@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+    <meta charset="utf-8"/>
+</h:head>
+
+<h:body>
+
+<form action="">
+
+    <table>
+        <tr>
+            <td>
+                Chat Log<br/>
+                <textarea readonly="true" rows="6" cols="50" id="chatlog"></textarea>
+            </td>
+            <td>
+                Users<br/>
+                <textarea readonly="true" rows="6" cols="20" id="users"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="text" id="message" onkeydown="sendMsgOnEnter(event)" />
+                <input onclick="join();" value="Join" type="button"/>
+                <input type="button" value="Send" onclick="sendMessage();" />
+                <input onclick="disconnect();" value="Disconnect" type="button"/>
+            </td>
+        </tr>
+    </table>
+
+</form>
+<div id="output"></div>
+
+<script type="text/javascript"
+        src="${facesContext.externalContext.requestContextPath}/scripts/chat.js"></script>
+
+</h:body>
+</html>
