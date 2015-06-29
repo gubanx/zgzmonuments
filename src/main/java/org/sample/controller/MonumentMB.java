@@ -7,6 +7,7 @@ import org.primefaces.model.map.Marker;
 import org.sample.model.Monument;
 import org.sample.model.MonumentList;
 import org.sample.service.InitService;
+import org.sample.service.VisitService;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -22,12 +23,17 @@ public class MonumentMB implements Serializable {
     @Inject
     private InitService initService;
 
+    @Inject
+    private VisitService visitService;
+
     private List<Monument> monuments;
     private Monument selectedMonument;
 
     private MapModel mapModel;
     private String centerMap = "41.6516912,-0.8949809";
     private String zoom = "13";
+
+    private Integer hits;
 
     @PostConstruct
     public void init() {
@@ -46,6 +52,8 @@ public class MonumentMB implements Serializable {
         mapModel.getMarkers().clear();
         mapModel.addOverlay(new Marker(coordinate, selectedMonument.getTitle()));
         zoom = "17";
+
+        hits = visitService.addVisit(monument.getId());
     }
 
     /* GETTER & SETTER */
@@ -88,5 +96,13 @@ public class MonumentMB implements Serializable {
 
     public void setZoom(String zoom) {
         this.zoom = zoom;
+    }
+
+    public Integer getHits() {
+        return hits;
+    }
+
+    public void setHits(Integer hits) {
+        this.hits = hits;
     }
 }
